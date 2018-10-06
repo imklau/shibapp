@@ -16,3 +16,9 @@ body {
 img {
   max-width: 100%;
 }
+
+.app {
+  max-width: 980px;
+  margin-left: auto;
+  margin-right: auto;
+}
