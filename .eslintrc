@@ -5,8 +5,9 @@
     "browser": true,
   },
   "plugins": [
-    "react"
+    "react",
   ],
   "rules": {
-  }
+    "react/button-has-type": ["off", {}],
+  },
 }
