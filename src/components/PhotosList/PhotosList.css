@@ -19,7 +19,7 @@
   background-position: center;
   background-size: cover;
   background-color: #fff;
-  box-shadow: 0 10px 20px rgba(0,0,0,.15);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, .15);
 }
 
 @media (min-width: 460px) {
