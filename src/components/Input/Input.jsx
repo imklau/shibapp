@@ -1,81 +1,85 @@
 import React from 'react';
-import { string, number } from 'prop-types';
+import {
+  string,
+  number,
+  oneOfType,
+  func,
+  bool,
+} from 'prop-types';
+
+import Button from '../Button/Button';
 
 import './Input.css';
 
-class Input extends React.Component {
-  constructor(props) {
-    super(props);
-    const { min, max, type } = this.props;
-    this.state = {
-      value: type === 'number' ? min : '',
-      min,
-      max,
-    };
-  }
-
-  handleChange(e) {
+const Input = ({
+  type,
+  size,
+  min,
+  max,
+  inputNumber,
+  handleChange,
+}) => {
+  const onInput = (e) => {
     const { value } = e.target;
 
-    this.setState({
-      value: parseInt(value, 10) || '',
-    });
-  }
+    handleChange(parseInt(value, 10) || '');
+  };
 
-  increment() {
-    let { value } = this.state;
-    const { max } = this.state;
-    value = parseInt(value, 10) || max;
+  const increment = () => {
+    const value = parseInt(inputNumber, 10) || max;
 
-    this.setState({
-      value: value < max ? value + 1 : max,
-    });
-  }
+    handleChange(value < max ? value + 1 : max);
+  };
 
-  decrement() {
-    const { value, min } = this.state;
+  const decrement = () => {
+    handleChange(inputNumber > min ? inputNumber - 1 : min);
+  };
 
-    this.setState({
-      value: value > min ? value - 1 : min,
-    });
-  }
+  return (
+    <div className="input-wrapper">
+      {type === 'number' && (
+        <Button
+          type="button"
+          variant="secondary"
+          size="small"
+          onClick={() => decrement()}
+        >
+          -
+        </Button>
+      )}
 
-  render() {
-    const {
-      type,
-      size,
-      min,
-      max,
-    } = this.props;
-    const { value } = this.state;
+      <input
+        type={type}
+        className={`input input--${size}`}
+        min={min}
+        max={max}
+        value={inputNumber}
+        onInput={e => onInput(e)}
+      />
 
-    return (
-      <div className="input-wrapper">
-        {type === 'number'
-        && <button className="input-button" onClick={this.decrement.bind(this)}>-</button>
-        }
-        <input
-          type={type}
-          className={`input input--${size}`}
-          min={min}
-          max={max}
-          value={value}
-          onInput={this.handleChange.bind(this)}
-        />
-        <p className="input-error">{`The value should be a number between ${min} and ${max}`}</p>
-        {type === 'number'
-        && <button className="input-button" onClick={this.increment.bind(this)}>+</button>
-        }
-      </div>
-    );
-  }
-}
+      <p className="input-error">{`The value should be a number between ${min} and ${max}`}</p>
+
+      {type === 'number' && (
+        <Button
+          type="button"
+          variant="secondary"
+          size="small"
+          onClick={() => increment()}
+        >
+          +
+        </Button>
+      )}
+    </div>
+  );
+};
 
 Input.propTypes = {
   type: string,
   size: string,
   min: number,
   max: number,
+  inputNumber: oneOfType([string, number]),
+  handleChange: oneOfType([func, bool]),
 };
 
 Input.defaultProps = {
@@ -83,6 +87,8 @@ Input.defaultProps = {
   size: 'regular',
   min: 1,
   max: 10,
+  inputNumber: '',
+  handleChange: false,
 };
 
 export default Input;
