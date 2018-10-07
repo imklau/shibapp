@@ -1,35 +1,38 @@
 import React from 'react';
 import {
+  oneOfType,
   arrayOf,
   object,
   string,
+  func,
+  bool,
 } from 'prop-types';
 
 import './Select.css';
 
 class Select extends React.Component {
-  constructor(props) {
-    super(props);
-    const { head } = this.props;
+  constructor() {
+    super();
 
     this.state = {
       isOpen: false,
-      select: head,
     };
   }
 
-  handleSelection(e) {
+  selectOption(e) {
+    const { handleSelect } = this.props;
     const { value } = e.target;
 
     this.setState({
-      select: value,
       isOpen: false,
     });
+
+    handleSelect(value);
   }
 
   render() {
-    const { isOpen, select } = this.state;
-    const { options } = this.props;
+    const { isOpen } = this.state;
+    const { options, header } = this.props;
 
     return (
       <div className={`select ${isOpen ? 'select--visible' : ''}`}>
@@ -38,16 +41,17 @@ class Select extends React.Component {
           className="select__heading"
           onClick={() => this.setState(prevState => ({ isOpen: !prevState.isOpen }))}
         >
-          {select}
+          {header}
         </button>
 
         <div className="select__options">
           { options.map(option => (
             <button
+              type="button"
               key={option.id}
               className="select__option"
-              onClick={this.handleSelection.bind(this)}
               value={option.name}
+              onClick={this.selectOption.bind(this)}
             >
               {option.name}
             </button>
@@ -60,7 +64,12 @@ class Select extends React.Component {
 
 Select.propTypes = {
   options: arrayOf(object).isRequired,
-  head: string.isRequired,
+  header: string.isRequired,
+  handleSelect: oneOfType([func, bool]),
+};
+
+Select.defaultProps = {
+  handleSelect: false,
 };
 
 export default Select;
