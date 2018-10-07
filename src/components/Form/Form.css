@@ -1,0 +1,36 @@
+.form {
+  max-width: 620px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 3rem 2rem;
+  background-color: #fff;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, .15);
+}
+
+.form > * + * {
+  margin-top: 2.5rem;
+}
+
+.form__header {
+  text-align: center;
+}
+
+.form__header > * + * {
+  margin-top: .5rem;
+}
+
+.form__title {
+  letter-spacing: 3px;
+}
+
+.form__subtitle {
+  letter-spacing: 3px;
+}
+
+.form__body {
+  display: flex;
+}
+
+.form__body > * + * {
+  margin-left: 1rem;
+}
