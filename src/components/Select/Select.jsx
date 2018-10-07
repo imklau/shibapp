@@ -41,7 +41,7 @@ class Select extends React.Component {
           className="select__heading"
           onClick={() => this.setState(prevState => ({ isOpen: !prevState.isOpen }))}
         >
-          {header}
+          {header || 'Select an option'}
         </button>
 
         <div className="select__options">
