@@ -1,17 +1,37 @@
 .button {
-  border: 1px solid #903749;
+  border: none;
   padding-top: 1rem;
   padding-bottom: 1rem;
   background-color: transparent;
-  color: #903749;
+  color: #333;
+  font-size: 14px;
   letter-spacing: 3px;
   cursor: pointer;
-  transition: .2s ease;
+  transition: .3s ease;
 }
 
-.button:hover {
-  background-color: #903749;
+.button--primary {
+  background-color: #d8c3c3;
   color: #fff;
+}
+
+.button--primary:hover {
+  background-color: #9b6868;
+}
+
+.button--secondary {
+  background-color: #e8e8e8;
+  color: #fff;
+}
+
+.button--secondary:hover {
+  background-color: #dcdada;
+  color: #fff;
+}
+
+.button--small {
+  padding-left: 1rem;
+  padding-right: 1rem;
 }
 
 .button--regular {
