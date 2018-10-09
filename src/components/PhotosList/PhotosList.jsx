@@ -14,7 +14,11 @@ const PhotosList = ({ photos }) => (
 );
 
 PhotosList.propTypes = {
-  photos: arrayOf(string).isRequired,
+  photos: arrayOf(string),
+};
+
+PhotosList.defaultProps = {
+  photos: [],
 };
 
 export default PhotosList;
