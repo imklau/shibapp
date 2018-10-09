@@ -5,13 +5,30 @@ import Form from './components/Form/Form';
 
 import './app.css';
 
-const photos = ['https://images.pexels.com/photos/426894/pexels-photo-426894.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260', 'https://images.pexels.com/photos/571150/pexels-photo-571150.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260', 'https://images.pexels.com/photos/1292684/pexels-photo-1292684.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260'];
+class App extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+      photos: [],
+    };
+  }
 
-const App = () => (
-  <React.Fragment>
-    <Form />
-    <PhotosList photos={photos} />
-  </React.Fragment>
-);
+  handleSubmit = (photos) => {
+    this.setState({
+      photos,
+    });
+  }
+
+  render() {
+    const { photos } = this.state;
+
+    return (
+      <React.Fragment>
+        <Form handleSubmit={this.handleSubmit} />
+        <PhotosList photos={photos} />
+      </React.Fragment>
+    );
+  }
+}
 
 ReactDOM.render(<App />, document.querySelector('#app'));
