@@ -20,14 +20,15 @@ class Select extends React.Component {
   }
 
   selectOption(e) {
-    const { handleSelect } = this.props;
+    const { handleSelect, options } = this.props;
     const { value } = e.target;
+    const option = options.find(element => element.name === value);
 
     this.setState({
       isOpen: false,
     });
 
-    handleSelect(value);
+    handleSelect(option);
   }
 
   render() {
